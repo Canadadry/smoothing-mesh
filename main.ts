@@ -34,10 +34,10 @@ love.load = ()=>{
 	mesh = new Mesh()
 	//insert one ugly quad
 	mesh.insterQuad([
-		new Vector(0,1).mul(scale).add(center),
-		new Vector(2,1).mul(scale).add(center),
-		new Vector(1,0.5).mul(scale).add(center),
 		new Vector(-1,0).mul(scale).add(center),
+		new Vector(1,0.5).mul(scale).add(center),
+		new Vector(2,1).mul(scale).add(center),
+		new Vector(0,1).mul(scale).add(center),
 	])
 
 	let q = mesh.quads[0]
@@ -45,6 +45,9 @@ love.load = ()=>{
 	let p1:Vector = mesh.points[q.points[1]]
 	let p2:Vector = mesh.points[q.points[2]]
 	let p3:Vector = mesh.points[q.points[3]]
+
+
+	let sign:number = (p0.sub(p1).vect(p2.sub(p1))) > 0 ? 1 : -1
 
 	diagonals=[
 		p1.sub(p3),
@@ -54,10 +57,10 @@ love.load = ()=>{
 	]
 
 	normals = [
-		new Vector(-diagonals[0].y,diagonals[0].x).normalize(),
-		new Vector(-diagonals[1].y,diagonals[1].x).normalize(),
-		new Vector(-diagonals[2].y,diagonals[2].x).normalize(),
-		new Vector(-diagonals[3].y,diagonals[3].x).normalize(),
+		new Vector(-diagonals[0].y,diagonals[0].x).normalize().mul(sign),
+		new Vector(-diagonals[1].y,diagonals[1].x).normalize().mul(sign),
+		new Vector(-diagonals[2].y,diagonals[2].x).normalize().mul(sign),
+		new Vector(-diagonals[3].y,diagonals[3].x).normalize().mul(sign),
 	]
 
 	mesh.insterQuad([
