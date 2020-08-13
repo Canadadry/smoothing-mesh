@@ -18,6 +18,9 @@ export class Vector{
 		let diff = this.sub(to);
 		return  math.sqrt( diff.x*diff.x+diff.y*diff.y ) 
 	}
+	normalize():Vector{
+		return this.mul(1/this.dist(new Vector(0,0)))
+	}
 	draw(){
 		love.graphics.setColor(1,0,0,1)
 		love.graphics.rectangle("fill",this.x-2,this.y-2,4,4,2,2)
