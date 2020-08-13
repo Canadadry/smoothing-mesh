@@ -26,6 +26,9 @@ love.load = ()=>{
 	//insert stretched quad
 	mesh.insterQuad(mesh.quads[0].stretch(mesh.points,scale*4))
 
+	//insert shrinked quad
+	mesh.insterQuad(mesh.quads[1].shrink(mesh.points,0.2))
+
 }
 
 
