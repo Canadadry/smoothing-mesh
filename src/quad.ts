@@ -66,4 +66,29 @@ export class Quad{
 			p3.sub(center).mul(factor).add(center),
 		]
 	}
+
+	quality(points:Vector[]):number{
+		let p0:Vector = points[this.points[0]]
+		let p1:Vector = points[this.points[1]]
+		let p2:Vector = points[this.points[2]]
+		let p3:Vector = points[this.points[3]]
+
+		let center:Vector = p0.add(p1).add(p2).add(p3).mul(1/4)
+
+		let d0:number = center.dist(p0)
+		let d1:number = center.dist(p1)
+		let d2:number = center.dist(p2)
+		let d3:number = center.dist(p3)
+
+		let mean:number = (d0+d1+d2+d3)/4
+
+		let stdDeviation:number = (d0-mean)*(d0-mean)
+								+ (d1-mean)*(d1-mean)
+								+ (d2-mean)*(d2-mean)
+								+ (d3-mean)*(d3-mean)
+		stdDeviation = stdDeviation/4
+		stdDeviation = math.sqrt(stdDeviation)
+
+		return 1-stdDeviation/mean
+	}
 }

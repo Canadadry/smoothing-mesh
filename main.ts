@@ -26,12 +26,14 @@ love.load = ()=>{
 	]
 
 	mesh.insterQuad(points)
+	print(mesh.quads[0].quality(mesh.points))
 
 	for(let i:number=0;i<steps;i++){
 		points = quad.shrink(quad.stretch(points,scale*4),0.2)
 	}
 
 	mesh.insterQuad(points)
+	print(mesh.quads[1].quality(mesh.points))
 }
 
 
