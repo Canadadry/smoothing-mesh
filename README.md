@@ -2,6 +2,10 @@
 
 Following [this algorithm](http://downloads.hindawi.com/journals/mpe/2015/435648.pdf)
 
+For now only smooth one quad 
+
+![smoothing one quad](screenshot.png)
+
 ## Demo Usage
 
 ### Setup
