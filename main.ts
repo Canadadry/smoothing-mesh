@@ -2,6 +2,7 @@ import {Vector} from './src/vector'
 import {Quad} from './src/quad'
 import {Mesh} from './src/mesh'
 import {Colors} from './src/color'
+import {smooth} from './src/smooth'
 
 
 let scale:number=50
@@ -40,48 +41,8 @@ love.load = ()=>{
 	mesh.insterQuad([p[1],p[2],p[5],p[4]],Colors.Blue)
 	// mesh.insterQuad([p[4],p[5],p[8],p[7]],Colors.Gray)
 
+	mesh2 = smooth(mesh,scale*4,0.2,1)
 
-	let newPoints:[number,Vector][] = []
-	for(let i:number=0;i<mesh.points.length;i++){
-		newPoints.push([0,new Vector(0,0)])
-	}
-
-	let fakeQuad = new Quad(0,1,2,3,Colors.White)
-
-	for(let i:number=0;i<mesh.quads.length;i++){
-		let quad = mesh.quads[i]
-		let quality = quad.quality(p)
-	 	let newP = fakeQuad.shrink(quad.stretch(p,scale*4),0.2)
-	 	newP = fakeQuad.shrink(fakeQuad.stretch(newP,scale*4),0.2)
-	 	newP = fakeQuad.shrink(fakeQuad.stretch(newP,scale*4),0.2)
-	 	newP = fakeQuad.shrink(fakeQuad.stretch(newP,scale*4),0.2)
-	 	newP = fakeQuad.shrink(fakeQuad.stretch(newP,scale*4),0.2)
-	 	newP = fakeQuad.shrink(fakeQuad.stretch(newP,scale*4),0.2)
-	 	newP = fakeQuad.shrink(fakeQuad.stretch(newP,scale*4),0.2)
-	 	newP = fakeQuad.shrink(fakeQuad.stretch(newP,scale*4),0.2)
-	 	newP = fakeQuad.shrink(fakeQuad.stretch(newP,scale*4),0.2)
-	 	quality = fakeQuad.quality(newP)// - quality
-
-
-		mesh2.insterQuad(newP,quad.color)
-
-	 	print(quality)
-
-	 	newPoints[quad.points[0]][0] += quality
-	 	newPoints[quad.points[0]][1]  = newP[0].mul(quality).add(newPoints[quad.points[0]][1]) 
-	 	newPoints[quad.points[1]][0] += quality
-	 	newPoints[quad.points[1]][1]  = newP[0].mul(quality).add(newPoints[quad.points[1]][1]) 
-	 	newPoints[quad.points[2]][0] += quality
-	 	newPoints[quad.points[2]][1]  = newP[0].mul(quality).add(newPoints[quad.points[2]][1]) 
-	 	newPoints[quad.points[3]][0] += quality
-	 	newPoints[quad.points[3]][1]  = newP[0].mul(quality).add(newPoints[quad.points[3]][1]) 
-	}
-
-	mesh3.quads = mesh.quads
-
-	for(let i:number=0;i<newPoints.length;i++){
-		mesh3.points.push(newPoints[i][1].mul(1/newPoints[i][0]))
-	}
 }
 
 
