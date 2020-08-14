@@ -1,6 +1,10 @@
 # Smoothing mesh 
 
-Following [this algorithm](http://downloads.hindawi.com/journals/mpe/2015/435648.pdf)
+
+
+Following : [Smoothing Algorithm for Planar and Surface Mesh Based on Element Geometric Deformation by 
+Shuli Sun, Minglei Zhang, and Zhihong Gou](http://downloads.hindawi.com/journals/mpe/2015/435648.pdf). Thanks to them.
+
 I have only change one thing : the formula 7 at page 4 which use the variation of quality of quad after SSO.
 Negative value don't work really well with barycenter. So I use only new quality with no regard about the improvment
 
