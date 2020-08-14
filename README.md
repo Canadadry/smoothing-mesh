@@ -57,6 +57,16 @@ The smooth function take 4 arguments :
 - the number time you want to repeat strech and shrink 
 
 
+## Issue encounter and fixed 
+
+Sometime a quad is so deformed, that its smoothed quad is no longer aligned with it and its corner are rotated. So I had a check for this kind of derivation
+
+Before fix 
+![before fix](scrennshot3.png)
+
+After fix 
+![after fix](scrennshot4.png)
+
 ## Demo Usage
 
 ### Setup

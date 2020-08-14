@@ -56,5 +56,4 @@ export class Mesh{
 		return this.points.length-1
 	}
 
-
 }
