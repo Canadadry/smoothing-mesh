@@ -42,7 +42,7 @@ export function smooth(mesh:Mesh,strechFactor:number,shrinkFactor:number,steps:n
 	 	for(let j:number=1;j<steps;j++){
 	 		newP = fakeQuad.shrink(fakeQuad.stretch(newP,strechFactor),shrinkFactor)
 		}
-	 	let quality = fakeQuad.quality(newP)
+	 	let quality = fakeQuad.quality1(newP)
 
 		intermediaryMesh.insterQuad(newP,quad.color)
 

@@ -67,6 +67,8 @@ Before fix
 After fix 
 ![after fix](screenshot4.png)
 
+There is an issue with the quality function base on angle between diagonal which gave a quality of 0 too often. Disabled for now
+
 ## Demo Usage
 
 ### Setup
