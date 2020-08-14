@@ -18,6 +18,9 @@ export class Vector{
 		let diff = this.sub(to);
 		return  math.sqrt( diff.x*diff.x+diff.y*diff.y ) 
 	}
+	dot(v:Vector):number{
+		return this.x*v.x-this.y*v.y	
+	}
 	vect(v:Vector):number{
 		return this.x*v.y-this.y*v.x
 	}

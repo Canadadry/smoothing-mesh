@@ -67,7 +67,14 @@ export class Quad{
 		]
 	}
 
+
 	quality(points:Vector[]):number{
+		let q1 =this.quality1(points)
+		let q2 =this.quality2(points) 
+		return q1*q2
+	}
+
+	quality1(points:Vector[]):number{
 		let p0:Vector = points[this.points[0]]
 		let p1:Vector = points[this.points[1]]
 		let p2:Vector = points[this.points[2]]
@@ -90,5 +97,21 @@ export class Quad{
 		stdDeviation = math.sqrt(stdDeviation)
 
 		return 1-stdDeviation/mean
+	}
+
+
+	quality2(points:Vector[]):number{
+		let p0:Vector = points[this.points[0]]
+		let p1:Vector = points[this.points[1]]
+		let p2:Vector = points[this.points[2]]
+		let p3:Vector = points[this.points[3]]
+
+
+		let dir0 = p0.sub(p2).normalize()
+		let dir1 = p1.sub(p3).normalize()
+
+		let angle = math.abs(math.acos(dir0.dot(dir0)))
+
+		return 1-math.abs(angle-math.pi/2)/(math.pi/2)
 	}
 }
