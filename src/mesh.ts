@@ -1,5 +1,6 @@
 import {Vector} from './vector'
 import {Quad} from './quad'
+import {Color} from './color'
 
 export class Mesh{
 	points:Vector[]
@@ -11,6 +12,7 @@ export class Mesh{
 		this.points=[]
 		this.neightBourPoints=[]
 		this.quads=[]
+		this.pointsToQuads=[]
 	}
 
 	draw(){
@@ -22,13 +24,13 @@ export class Mesh{
 		}
 	}
 
-	insterQuad(points:[Vector,Vector,Vector,Vector]){
+	insterQuad(points:[Vector,Vector,Vector,Vector],c:Color){
 		let p1:number = this.insertPoint(points[0])
 		let p2:number = this.insertPoint(points[1])
 		let p3:number = this.insertPoint(points[2])
 		let p4:number = this.insertPoint(points[3])
 
-		let q = new Quad(p1,p2,p3,p4)
+		let q = new Quad(p1,p2,p3,p4,c)
 
 		this.quads.push(q)
 		this.pointsToQuads[p1].push(q)

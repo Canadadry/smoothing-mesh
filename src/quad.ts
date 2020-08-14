@@ -1,9 +1,12 @@
 import {Vector} from './vector'
+import {Color} from './color'
 
 export class Quad{
 	points:[number,number,number,number]
-	constructor(p1:number,p2:number,p3:number,p4:number){
+	color:Color
+	constructor(p1:number,p2:number,p3:number,p4:number,c:Color){
 		this.points = [p1,p2,p3,p4]
+		this.color=c
 	}
 	draw(points:Vector[]){
 		let p0:Vector = points[this.points[0]]
@@ -13,7 +16,7 @@ export class Quad{
 
 		let center:Vector = p0.add(p1).add(p2).add(p3).mul(1/4)
 
-		love.graphics.setColor(1,1,1,1)
+		love.graphics.setColor(this.color.r,this.color.g,this.color.b,1)
 		love.graphics.line(p0.x,p0.y,p1.x,p1.y)
 		love.graphics.line(p1.x,p1.y,p2.x,p2.y)
 		love.graphics.line(p2.x,p2.y,p3.x,p3.y)
