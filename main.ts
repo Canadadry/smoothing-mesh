@@ -6,24 +6,24 @@ import {smooth} from './src/smooth'
 
 
 let scale:number=50
-let steps:number=3;
+let SSOsteps:number=3;
+let smoothingStep:number=3;
 let center:Vector = new Vector(400,300)
 let mesh:Mesh;
-let mesh2:Mesh;
-let mesh3:Mesh;
+let smoothedMesh:Mesh;
 
 love.draw = function() {
 	love.graphics.clear(0,0,0)
-	// mesh.draw()
-	mesh2.draw()
-	mesh3.draw()
+	love.graphics.translate(-scale*2,0)
+	mesh.draw()
+	love.graphics.translate(scale*4,0)
+	smoothedMesh.draw()
 
 }
 
 love.load = ()=>{
 	mesh = new Mesh()
-	mesh2 = new Mesh()
-	mesh3 = new Mesh()
+	smoothedMesh = mesh
 
 	let p:Vector[] = [
 		new Vector(  -1,-2).mul(scale).add(center),
@@ -42,9 +42,12 @@ love.load = ()=>{
 	mesh.insterQuad([p[1],p[2],p[5],p[4]],Colors.Blue)
 	mesh.insterQuad([p[4],p[5],p[8],p[7]],Colors.Gray)
 
-	let out = smooth(mesh,scale*4,0.2,1)
-	mesh2 = out[0]
-	mesh3 = out[1]
+
+	smoothedMesh = mesh
+	for(let i:number = 0;i<smoothingStep;i++){
+		let out = smooth(mesh,scale*4,0.2,SSOsteps)
+		smoothedMesh = out[1]
+	}
 
 }
 

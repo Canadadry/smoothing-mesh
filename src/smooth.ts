@@ -29,16 +29,16 @@ export function smooth(mesh:Mesh,strechFactor:number,shrinkFactor:number,steps:n
 
 		intermediaryMesh.insterQuad(newP,quad.color)
 
-	 	print(quality)
+	 	// print(quad.points[0],quad.points[1],quad.points[2],quad.points[3])
 
 	 	newPoints[quad.points[0]][0] += quality
 	 	newPoints[quad.points[0]][1]  = newP[0].mul(quality).add(newPoints[quad.points[0]][1]) 
 	 	newPoints[quad.points[1]][0] += quality
-	 	newPoints[quad.points[1]][1]  = newP[0].mul(quality).add(newPoints[quad.points[1]][1]) 
+	 	newPoints[quad.points[1]][1]  = newP[1].mul(quality).add(newPoints[quad.points[1]][1]) 
 	 	newPoints[quad.points[2]][0] += quality
-	 	newPoints[quad.points[2]][1]  = newP[0].mul(quality).add(newPoints[quad.points[2]][1]) 
+	 	newPoints[quad.points[2]][1]  = newP[2].mul(quality).add(newPoints[quad.points[2]][1]) 
 	 	newPoints[quad.points[3]][0] += quality
-	 	newPoints[quad.points[3]][1]  = newP[0].mul(quality).add(newPoints[quad.points[3]][1]) 
+	 	newPoints[quad.points[3]][1]  = newP[3].mul(quality).add(newPoints[quad.points[3]][1]) 
 	}
 
 	for(let i:number=0;i<newPoints.length;i++){
