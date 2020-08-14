@@ -25,27 +25,33 @@ love.load = ()=>{
 	mesh = new Mesh()
 	smoothedMesh = mesh
 
-	let p:Vector[] = [
-		new Vector(  -1,-2).mul(scale).add(center),
-		new Vector(  -2, 0).mul(scale).add(center),
-		new Vector(  -1, 1).mul(scale).add(center),
-		new Vector(   0,-1).mul(scale).add(center),
-		new Vector( 0.5, 0).mul(scale).add(center),
-		new Vector(   0, 1).mul(scale).add(center),
-		new Vector(   1,-2).mul(scale).add(center),
-		new Vector(   1, 0).mul(scale).add(center),
-		new Vector(   2, 1).mul(scale).add(center),
-	]
 
-	mesh.insterQuad([p[0],p[1],p[4],p[3]],Colors.White)
-	mesh.insterQuad([p[3],p[4],p[7],p[6]],Colors.Green)
-	mesh.insterQuad([p[1],p[2],p[5],p[4]],Colors.Blue)
-	mesh.insterQuad([p[4],p[5],p[8],p[7]],Colors.Gray)
+	let size:number = 20;
+	let p:Vector[] = []
+	center = center.add(new Vector(-size/2,-size/2).mul(scale))
 
+	for(let i:number=0;i<size;i++){
+		for(let j:number=0;j<size;j++){
+			let offsetI:number = math.random()-1
+			let offsetJ:number = math.random()-1
+			p.push(new Vector(i+offsetI,j+offsetJ).mul(scale).add(center))	
+		}
+	}
+
+	for(let i:number=0;i<(size-1);i++){
+		for(let j:number=0;j<(size-1);j++){
+			mesh.insterQuad([
+				p[i+0 +(j+0)*size],
+				p[i+1 +(j+0)*size],
+				p[i+1 +(j+1)*size],
+				p[i+0 +(j+1)*size],
+			],Colors.White)
+		}
+	}
 
 	smoothedMesh = mesh
 	for(let i:number = 0;i<smoothingStep;i++){
-		let out = smooth(mesh,scale*4,0.2,SSOsteps)
+		let out = smooth(smoothedMesh,scale*4,0.2,SSOsteps)
 		smoothedMesh = out[1]
 	}
 
