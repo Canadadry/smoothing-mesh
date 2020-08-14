@@ -4,13 +4,11 @@ import {Color} from './color'
 
 export class Mesh{
 	points:Vector[]
-	neightBourPoints:number[][]
 	quads:Quad[]
 	pointsToQuads:Quad[][]
 
 	constructor(){
 		this.points=[]
-		this.neightBourPoints=[]
 		this.quads=[]
 		this.pointsToQuads=[]
 	}
@@ -37,15 +35,6 @@ export class Mesh{
 		this.pointsToQuads[p2].push(q)
 		this.pointsToQuads[p3].push(q)
 		this.pointsToQuads[p4].push(q)
-
-		this.insertNeighbour(p1,p2)
-		this.insertNeighbour(p1,p4)
-		this.insertNeighbour(p2,p1)
-		this.insertNeighbour(p2,p2)
-		this.insertNeighbour(p3,p2)
-		this.insertNeighbour(p3,p4)
-		this.insertNeighbour(p4,p3)
-		this.insertNeighbour(p4,p1)
 	}
 
 	private findPoint(p:Vector,dist:number):number|null{
@@ -63,23 +52,9 @@ export class Mesh{
 			return index
 		}
 		this.points.push(p)
-		this.neightBourPoints.push([])
 		this.pointsToQuads.push([])
 		return this.points.length-1
 	}
 
-	private containNeighbour(p:number,n:number):boolean{
-		for(let i:number=0;i<this.neightBourPoints[p].length;i++){
-			if(this.neightBourPoints[p][i]==n){
-				return true
-			}
-		}
-		return false
-	}
 
-	private insertNeighbour(p:number,n:number){
-		if(this.containNeighbour(p,n)==false){
-			this.neightBourPoints[p].push(n)
-		}
-	}
 }

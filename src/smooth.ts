@@ -7,7 +7,6 @@ export function smooth(mesh:Mesh,strechFactor:number,shrinkFactor:number,steps:n
 	let intermediaryMesh:Mesh = new Mesh()	
 	let smoothedMesh:Mesh = new Mesh()	
 	smoothedMesh.quads = mesh.quads
-	smoothedMesh.neightBourPoints = mesh.neightBourPoints
 	smoothedMesh.pointsToQuads = mesh.pointsToQuads
 
 	let newPoints:[number,Vector][] = []
