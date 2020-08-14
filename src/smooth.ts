@@ -3,11 +3,12 @@ import {Vector} from './vector'
 import {Quad} from './quad'
 import {Colors} from './color'
 
-export function smooth(mesh:Mesh,strechFactor:number,shrinkFactor:number,steps:number):Mesh{
-	let outMesh:Mesh = new Mesh()	
-	// outMesh.quads = mesh.quads
-	// outMesh.neightBourPoints = mesh.neightBourPoints
-	// outMesh.pointsToQuads = mesh.pointsToQuads
+export function smooth(mesh:Mesh,strechFactor:number,shrinkFactor:number,steps:number):[Mesh,Mesh]{
+	let intermediaryMesh:Mesh = new Mesh()	
+	let smoothedMesh:Mesh = new Mesh()	
+	smoothedMesh.quads = mesh.quads
+	smoothedMesh.neightBourPoints = mesh.neightBourPoints
+	smoothedMesh.pointsToQuads = mesh.pointsToQuads
 
 	let newPoints:[number,Vector][] = []
 	for(let i:number=0;i<mesh.points.length;i++){
@@ -26,7 +27,7 @@ export function smooth(mesh:Mesh,strechFactor:number,shrinkFactor:number,steps:n
 	 	quality = fakeQuad.quality(newP)// - quality
 
 
-		outMesh.insterQuad(newP,quad.color)
+		intermediaryMesh.insterQuad(newP,quad.color)
 
 	 	print(quality)
 
@@ -40,8 +41,8 @@ export function smooth(mesh:Mesh,strechFactor:number,shrinkFactor:number,steps:n
 	 	newPoints[quad.points[3]][1]  = newP[0].mul(quality).add(newPoints[quad.points[3]][1]) 
 	}
 
-	// for(let i:number=0;i<newPoints.length;i++){
-	// 	outMesh.points.push(newPoints[i][1].mul(1/newPoints[i][0]))
-	// }
-	return outMesh
+	for(let i:number=0;i<newPoints.length;i++){
+		smoothedMesh.points.push(newPoints[i][1].mul(1/newPoints[i][0]))
+	}
+	return [intermediaryMesh,smoothedMesh]
 }

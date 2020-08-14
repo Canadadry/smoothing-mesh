@@ -14,8 +14,9 @@ let mesh3:Mesh;
 
 love.draw = function() {
 	love.graphics.clear(0,0,0)
-	mesh.draw()
+	// mesh.draw()
 	mesh2.draw()
+	mesh3.draw()
 
 }
 
@@ -36,12 +37,14 @@ love.load = ()=>{
 		new Vector(   2, 1).mul(scale).add(center),
 	]
 
-	// mesh.insterQuad([p[0],p[1],p[4],p[3]],Colors.White)
-	// mesh.insterQuad([p[3],p[4],p[7],p[6]],Colors.Green)
+	mesh.insterQuad([p[0],p[1],p[4],p[3]],Colors.White)
+	mesh.insterQuad([p[3],p[4],p[7],p[6]],Colors.Green)
 	mesh.insterQuad([p[1],p[2],p[5],p[4]],Colors.Blue)
-	// mesh.insterQuad([p[4],p[5],p[8],p[7]],Colors.Gray)
+	mesh.insterQuad([p[4],p[5],p[8],p[7]],Colors.Gray)
 
-	mesh2 = smooth(mesh,scale*4,0.2,1)
+	let out = smooth(mesh,scale*4,0.2,1)
+	mesh2 = out[0]
+	mesh3 = out[1]
 
 }
 
