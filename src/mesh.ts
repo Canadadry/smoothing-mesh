@@ -5,6 +5,7 @@ export class Mesh{
 	points:Vector[]
 	neightBourPoints:number[][]
 	quads:Quad[]
+	pointsToQuads:Quad[][]
 
 	constructor(){
 		this.points=[]
@@ -27,7 +28,13 @@ export class Mesh{
 		let p3:number = this.insertPoint(points[2])
 		let p4:number = this.insertPoint(points[3])
 
-		this.quads.push(new Quad(p1,p2,p3,p4))
+		let q = new Quad(p1,p2,p3,p4)
+
+		this.quads.push(q)
+		this.pointsToQuads[p1].push(q)
+		this.pointsToQuads[p2].push(q)
+		this.pointsToQuads[p3].push(q)
+		this.pointsToQuads[p4].push(q)
 
 		this.insertNeighbour(p1,p2)
 		this.insertNeighbour(p1,p4)
@@ -55,6 +62,7 @@ export class Mesh{
 		}
 		this.points.push(p)
 		this.neightBourPoints.push([])
+		this.pointsToQuads.push([])
 		return this.points.length-1
 	}
 
