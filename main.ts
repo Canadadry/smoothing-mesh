@@ -5,18 +5,18 @@ import {Colors} from './src/color'
 import {smooth} from './src/smooth'
 
 
-let scale:number=50
+let scale:number=18
 let SSOsteps:number=3;
-let smoothingStep:number=3;
+let smoothingStep:number=20;
 let center:Vector = new Vector(400,300)
 let mesh:Mesh;
 let smoothedMesh:Mesh;
 
 love.draw = function() {
 	love.graphics.clear(0,0,0)
-	love.graphics.translate(-scale*2,0)
+	love.graphics.translate(-200,0)
 	mesh.draw()
-	love.graphics.translate(scale*4,0)
+	love.graphics.translate(400,0)
 	smoothedMesh.draw()
 
 }
